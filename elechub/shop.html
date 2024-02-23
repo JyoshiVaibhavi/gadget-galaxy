@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Shop-Best-Sellers</title>
+</head>
+<style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    backdrop-filter: blur(5px);
+    /* Blurred background */
+    z-index: 1000;
+    display: none;
+  }
+
+  .page-content {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background-color: black;
+    padding: 20px;
+    border-radius: 25px;
+    display: none;
+    width: 1000px;
+  }
+
+  input {
+    background-color: black;
+
+  }
+
+  button {
+    background-color: black;
+    border: none;
+    color: white;
+
+  }
+
+  .navbar {
+    background-color: rgb(5, 5, 95);
+  }
+
+  .navbar-brand {
+    padding-right: 320px;
+    padding-left: 100px;
+
+  }
+
+  #icon {
+    padding-left: 60px;
+    padding-right: 50px;
+  }
+
+  #icon2 {
+    padding-left: 60px;
+    padding-right: 50px;
+  }
+
+  #navbarSupportedContent {
+    padding-left: 560px;
+
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(148, 136, 136);
+  }
+
+  a:hover {
+    text-decoration: underline;
+
+  }
+
+  #footer img {
+    width: 60px;
+    margin-top: 50px;
+    margin-left: 50px;
+
+  }
+
+  #footer {
+    padding-left: 450px;
+  }
+
+  input {
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: white;
+
+  }
+
+  .modal-content {
+    width: 400px;
+    height: 200px;
+    border-radius: 20px;
+
+  }
+
+  #cart {
+    border: 2px solid black;
+    height: 100%;
+    background-color: white;
+
+
+  }
+
+ 
+  #cart li {
+    list-style-type: decimal;
+    font-size: 20px;
+    font-weight: 450;
+  }
+
+  #cart p {
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+
+  }
+
+  #cart button {
+    background-color: rgb(132, 123, 123);
+    height:40px;
+    width: 150px;
+    color: black;
+    border: 1px solid white ;
+    border-radius:20px;
+    margin-left:30px;
+  }
+
+ 
+</style>
+
+<body>
+  <p style="text-align: center;margin-top:20px;font-size:15px;"><b>For a limited time, you can save 15% and enjoy free
+      shipping.</b></p>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="width:100%;">
+
+      <button class="btn" type="submit" onclick="openPage()"><i class="fa-solid fa-magnifying-glass fa-xl text-light"
+          id="icon"></i></button>
+
+      <div id="overlay" class="overlay"></div>
+      <div id="pageContent" class="page-content">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 bg-dark text-light" type="search" placeholder="Search" aria-label="Search"
+            id="searchInput">
+
+          <button onclick="closePage()"><i class="fa-solid fa-xmark fa-xl text-light"></i></button>
+         
+      </div>
+
+      </form>
+    </div>
+    <a class="navbar-brand" href="#"><img src="images/elechub-logo2.avif" alt=""></a>
+    <a href="" id="cart-link" onclick="openPage()"><i class="fa-solid fa-cart-shopping text-light fa-xl pr-4" id="icon2"
+        id="cart-icon"></i></a>
+    </div>
+  </nav>
+  <!--  -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="width:100%;">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="index.html">Home</a>
+          </li>
+          &nbsp;
+          <li class="nav-item">
+            <a class="nav-link text-light" href="shop.html">Shop Best Sellers</a>
+          </li>
+          &nbsp;
+          <li class="nav-item">
+            <a class="nav-link text-light" href="contact.html">Contact</a>
+          </li>
+
+      </div>
+    </div>
+  </nav>
+  <!--  -->
+  <div class="container-fluid" style="width: 100%;">
+    <div class="row">
+      <div class="col-md-12" style="margin-left:30px;margin-top:30px;">
+        <h1 style="margin-bottom:50px;font-size:50px;"><b>Products</b></h1>
+        <div class="col-md-4" style="height: auto;margin-left:850px;">
+            <div id="cart" style="padding: 20px;">
+                
+                <ul id="cart-items">
+        
+                </ul>
+                <p>Total: ₹<span id="cart-total">0.00</span></p>
+                <button onclick="placeOrder()"><b>Place Order</b></button>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <p type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Filter: <select name="" id="" style="border: none;background-color:transparent;">
+            <option value="">Price</option>
+          </select>
+        </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">The highest price is $137.57</h1>
+                &nbsp; &nbsp;&nbsp; &nbsp;
+                <a href="" class="btn" data-bs-dismiss="modal">Close</a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="price-range">
+                  <label for="min-price">$</label>
+                  <input type="number" id="min-price" placeholder="From">
+                  &nbsp; &nbsp;
+                  <label for="max-price">$</label>
+                  <input type="number" id="max-price" placeholder="To">
+                </div>
+                <div class="modal-footer">
+
+                  <button type="button" class="btn">Reset</button>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row m-4">
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="CleanBot" data-id="1" data-price="105.50" 
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card1.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>CleanBot UltraSpray 2022 - Windows
+              Cleaner Robot Limabean</b></a>
+          <p><strike><b>$195.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $105.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company=" Quartz Heater" data-id="2" data-price=" 74.50" data-name="CleanBot"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card2.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>CozyGlow 1500W 4-Element Infrared
+              Quartz Heater</b></a>
+          <p><strike><b>$149.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $74.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company=" Curtain Lights" data-id="3" data-price=" 81.50" data-name="CleanBot"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card3.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>IlluminateCraft Smart RGB Curtain
+              Lights</b></a>
+          <p><strike><b>$164.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $81.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="  Humidifier" data-id="4" data-price="54.50" data-name="CleanBot"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card4.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>AromaMist Pro 4L Ultrasonic
+              Humidifier</b></a>
+          <p><strike><b>$104.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $54.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row m-4">
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="   Retro Gaming" data-id="5" data-price="137.57" data-name="CleanBot"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card5.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>NostalgiX Retro Gaming Console
+            </b></a>
+          <p><strike><b>$343.92</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $137.57</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="PowerPro CleanDrive" data-id="6" data-price="44.50" 
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card6.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>PowerPro CleanDrive 2000<br>
+              Quartz Heater</b></a>
+          <p><strike><b>$99.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $44.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company=" Vaccum Cleaner" data-id="7" data-price="14.50"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card7.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>SmartSweep Pro - Intelligent Robot
+              Vaccum Cleaner</b></a>
+          <p><strike><b>$29.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $14.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="SparkClean" data-id="8" data-price="35.50"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card8.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>SparkClean Pro 600</b></a>
+          <p><strike><b>$71.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $35.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row m-4">
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="Mini IronPro" data-id="9" data-price="21.50"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card9.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>StreamEase Mini IronPro</b></a>
+          <p><strike><b>$44.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $21.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="TranquilBreathe" data-id="10" data-price="59.50"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card10.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>TranquilBreathe 8L Ultrasonic<br>
+              Humidifier</b></a>
+          <p><strike><b>$109.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $59.50</b></p>
+          <button  onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;">Add
+            to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="Portable Air Purifier" data-id="11" data-price="31.50"
+          style="width:300px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card11.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>ZenAir Mini IonFlow - USB Portable
+              Air Purifier</b></a>
+          <p><strike><b>$64.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $31.50</b></p>
+          <button
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;"
+            onclick="addToCart(this)">Add to Cart</button>
+
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="productItem p-4" data-company="Oasis Humidifier" data-id="12" data-price="41.50"
+          style="width:320px;border:1px solid black;height: 500px;border-radius: 15px;">
+          <a href="" style="width:250px;height:350px;background-position:50%;background-size: cover;">
+            <button style="background-color: orange;width:70px;color: black;">Sale</button>
+            <img src="images/card12.webp" alt="" style="width:200px;height:250px;"> </a>
+          <a href="" class="text-dark"><b>ZenMist Home Oasis Humidifier</b></a>
+          <p><strike><b>$84.50</b></strike>&nbsp;&nbsp;<b class="text-danger" style="font-size: 20px;"> $41.50</b></p>
+          <button onclick="addToCart(this)"
+            style="width: 250px;height:50px;border-radius: 25px;background-color: transparent;color:black;border:2px solid black;"
+            id="add-to-cart-btn">Add to
+            Cart</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+
+  <div class="container-fluid bg-dark text-light" style="width:100%;padding-top: 30px;padding-bottom: 100px;">
+    <div class="row">
+      <div class="col-md-4" style="padding-left: 50px;">
+        <h5><b>Secure Checkout</b></h5>
+        <p>We use bank-level encrypted SSL security to <br>
+          ensure your payment and personal <br>
+          information are 100% protected.</p>
+
+      </div>
+      <div class="col-md-4">
+        <h5><b>ElecHub Customer Service:</b></h5>
+        <p>24/7 Support: support@elechub.com</p>
+        <br><br><br>
+        <button
+          style="width:150px;border-radius:20px;height:35px;background-color: blue;border: 1px solid white;margin-left: 40px;"><i
+            class="fa-regular fa-heart"></i> Follow on <b>shop</b></button>
+
+      </div>
+      <div class="col-md-4">
+        <h5><b>Quick links</b></h5>
+        <nav>
+          <a href="">Search</a>
+          <br>
+          <a href="">Privacy Policy</a>
+          <br>
+          <a href="">Shipping Policy</a>
+          <br>
+          <a href="">Terms of Service</a>
+        </nav>
+        <br><br><br>
+      </div>
+    </div>
+    <hr>
+
+ 
+
+
+    <div class="row">
+      <div class="col-md-12" id="footer">
+        <img src="images/gpay.png" alt="">
+        <img src="images/apple pay.png" alt="">
+        <img src="images/meta.png" alt="">
+        <img src="images/visa.png" alt="">
+        <p style="padding-left: 160px;padding-top:20px;">@2024 <a href="">ElecHub</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  
+  <script>
+    function openPage() {
+      var overlay = document.getElementById("overlay");
+      var pageContent = document.getElementById("pageContent");
+      overlay.style.display = "block";
+      pageContent.style.display = "block";
+    }
+
+
+    function closePage() {
+      var overlay = document.getElementById("overlay");
+      var pageContent = document.getElementById("pageContent");
+      overlay.style.display = "none";
+      pageContent.style.display = "none";
+    }
+
+    // 
+    document.getElementById('searchInput').addEventListener('input', function () {
+      var searchTerm = this.value.toLowerCase();
+      var productItems = document.querySelectorAll('.productItem');
+
+      productItems.forEach(function (productItem) {
+        var company = productItem.dataset.company.toLowerCase();
+        if (company.includes(searchTerm)) {
+          productItem.style.display = '';
+        } else {
+          productItem.style.display = 'none';
+        }
+      })
+    });
+
+
+    function addToCart(button) {
+      var product = button.parentNode;
+      var productId = product.getAttribute('data-id');
+      var productName = product.getAttribute('data-company');
+      var productPrice = parseFloat(product.getAttribute('data-price'));
+
+      var cartItems = document.getElementById('cart-items');
+      var cartTotalElement = document.getElementById('cart-total');
+
+      // Check if the product is already in the cart
+      var existingCartItem = document.querySelector(`#cart-items li[data-id="${productId}"]`);
+      if (existingCartItem) {
+        // Increment the quantity if the product is already in the cart
+        var quantityElement = existingCartItem.querySelector('.quantity');
+        var quantity = parseInt(quantityElement.textContent);
+        quantityElement.textContent = quantity + 1;
+      } else {
+
+        var cartItem = document.createElement('li');
+        cartItem.setAttribute('data-id', productId);
+        cartItem.innerHTML =` ${productName} - <span class="quantity">1</span>`;
+        cartItems.appendChild(cartItem);
+      }
+
+      var currentTotal = parseFloat(cartTotalElement.textContent);
+      cartTotalElement.textContent = (currentTotal + productPrice).toFixed(2);
+    }
+
+    function placeOrder() {
+      alert('Order placed successfully!');
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

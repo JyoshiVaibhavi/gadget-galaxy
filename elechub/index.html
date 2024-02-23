@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>ElecHub</title>
+</head>
+<style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    backdrop-filter: blur(5px);
+    /* Blurred background */
+    z-index: 1000;
+    display: none;
+  }
+
+  .page-content {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background-color: black;
+    padding: 20px;
+    border-radius: 25px;
+    display: none;
+    width: 1000px;
+  }
+
+  input {
+    background-color: black;
+
+  }
+
+  button {
+    background-color: black;
+    border: none;
+    color: white;
+
+  }
+
+  .navbar {
+    background-color: rgb(5, 5, 95);
+  }
+
+  .navbar-brand {
+    padding-right: 100px;
+    padding-left: 100px;
+
+  }
+
+  #icon {
+    padding-left: 60px;
+    padding-right: 50px;
+  }
+  #icon2 {
+    padding-left: 60px;
+    padding-right: 50px;
+  }
+
+  #navbarSupportedContent {
+    padding-left: 560px;
+
+  }
+
+  a:hover {
+    text-decoration: underline;
+
+  }
+  .accordion {
+  background-color:white;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+hr{
+  width: 100%;
+}
+.active, .accordion:hover {
+  background-color: #ccc;
+  text-decoration: underline;
+ 
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+ 
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+a{
+  text-decoration: none;
+  color: rgb(148, 136, 136);
+}
+#footer img{
+           width:60px;
+           margin-top: 50px;
+           margin-left:50px;
+          
+}
+#footer{
+  padding-left:450px;
+}
+/*  */
+header{
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    margin-top: 50px;
+}
+header .shopping{
+    position: relative;
+    text-align: right;
+}
+header .shopping img{
+    width: 40px;
+}
+header .shopping span{
+    background: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: absolute;
+    top: -5px;
+    left: 80%;
+    padding: 3px 10px;
+}
+.list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 50px;
+}
+.list .item{
+    text-align: center;
+    background-color: #DCE0E1;
+    padding: 20px;
+    box-shadow: 0 50px 50px #757676;
+    letter-spacing: 1px;
+}
+.list .item img{
+    width: 90%;
+}
+.list .item .title{
+    font-weight: 600;
+}
+.list .item .price{
+    margin: 10px;
+}
+.list .item button{
+    background-color: #1C1F25;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+}
+.card{
+    position: fixed;
+    top:0;
+    left: 100%;
+    width: 500px;
+    background-color: #453E3B;
+    height: 100vh;
+    transition: 0.5s;
+}
+.active .card{
+    left: calc(100% - 500px);
+}
+.active .container{
+   transform: translateX(-200px);
+}
+.card h1{
+    color: #E8BC0E;
+    font-weight: 100;
+    margin: 0;
+    padding: 0 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.card .checkOut{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+.card .checkOut div{
+    background-color: #E8BC0E;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.card .checkOut div:nth-child(2){
+    background-color: #1C1F25;
+    color: #fff;
+}
+.listCard li{
+    display: grid;
+    grid-template-columns: 100px repeat(3, 1fr);
+    color: #fff;
+    row-gap: 10px;
+}
+.listCard li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.listCard li img{
+    width: 90%;
+}
+.listCard li button{
+    background-color: #fff5;
+    border: none;
+}
+.listCard .count{
+    margin: 0 10px;
+}
+
+
+</style>
+
+<body>
+  <p style="text-align: center;margin-top:20px;font-size:15px;"><b>For a limited time, you can save 15% and enjoy free
+      shipping.</b></p>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid"style="width:100%;">
+
+      <button class="btn" type="submit" onclick="openPage()"><i
+          class="fa-solid fa-magnifying-glass fa-xl text-light" id="icon"></i></button>
+
+      <div id="overlay" class="overlay"></div>
+      <div id="pageContent" class="page-content">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 bg-dark text-light" type="search" placeholder="Search" aria-label="Search">
+          <header>
+         
+            <div class="shopping">
+              <button onclick="closePage()"><i class="fa-solid fa-xmark fa-xl text-light"></i></button>
+                <span class="quantity">0</span>
+            </div>
+        </header>
+
+        <div class="list">
+
+        </div>
+    </div>
+    <div class="card">
+        <h1>Card</h1>
+        <ul class="listCard">
+        </ul>
+        <div class="checkOut">
+            <div class="total">0</div>
+            <div class="closeShopping">Close</div>
+        </div>
+          
+        </form>
+      </div>
+      <a class="navbar-brand" href="#"><img src="images/elechub-logo2.avif" alt=""></a>
+      <a href=""><i class="fa-solid fa-cart-shopping text-light fa-xl pr-4" id="icon2"></i></a>
+    </div>
+  </nav>
+  <!--  -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid"style="width:100%;">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="index.html">Home</a>
+          </li>
+          &nbsp;
+          <li class="nav-item">
+            <a class="nav-link text-light" href="shop.html">Shop Best Sellers</a>
+          </li>
+          &nbsp;
+          <li class="nav-item">
+            <a class="nav-link text-light" href="contact.html">Contact</a>
+          </li>
+
+      </div>
+    </div>
+  </nav>
+  <!--  -->
+  <div class="container-fluid" style="width:100%;">
+    <div class="row">
+      <div class="col-md-12"
+        style="background-image: url(images/bg1.jpg);background-repeat: no-repeat;width:3500px;height:700px;background-size: cover;background-position: 100%;">
+        <nav
+          style="width:550px;height:260px;padding-top:30px;padding-left:30px; margin-top:25px;border-radius: 20px;background-color: rgb(169, 161, 161);">
+          <h2>Elevate Your Tech-Savvy <br> Lifestyle Today.</h2>
+          <p>Cutting-edge electronics that will revolutionize your daily life.</p>
+          <a href="shop.html"><button style=" width: 200px;height:50px;border-radius:25px;">Shop Best Sellers</button></a>
+        </nav>
+      </div>
+    </div>
+    <div class="row m-4" >
+      <div class="col-md-4">
+        <div class="card p-4" style="width:350px;border:none;background-color: rgb(225, 223, 223);">
+          <h5>great deals...</h5>
+          <p>“The detailed product descriptions and <br>
+             customer reviews help me make <br>
+              informed choices. It's a one-stop shop <br>
+               for all my needs.Thank you!”</p>
+               <img src="images/5-star pic.webp" alt="" style="width:100px;">
+               <p><b>Nadina S</b></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4" style="width:350px;border:none;background-color: rgb(225, 223, 223);">
+          <h5>amazing support...</h5>
+          <p>“Their responsiveness and willingness <br>
+             to assist impressed me. It's reassuring <br>
+              to know that they genuinely care about <br>
+               their customers' satisfaction.”</p>
+               <img src="images/5-star pic.webp" alt="" style="width:100px;">
+               <p><b>Tom Kerr</b></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4" style="width:350px;border:none;background-color: rgb(225, 223, 223);">
+          <h5>hassle-free shopping...</h5>
+          <p>“The shipping is lightning fast, and <br>
+             returns are hassle-free. I've never had <br>
+              any issues with the quality of the <br>
+               products.”</p>
+               <img src="images/5-star pic.webp" alt="" style="width:100px;">
+               <p><b>Richard M</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  -->
+  <div class="container-fluid">
+    <div class="row" style="margin-top:50px;">
+      <div class="col-md-12" style="text-align: center;">
+        <h1  class="mb-4"><b>Frequently Asked Questions</b></h1>
+        <hr>
+    <button class="accordion"style="text-align: center;"><b>What do you charge for shipping and handling?</b></button>
+<div class="panel">
+  <p>For a limited time all products include free shipping. This could change at any time.</p>
+</div>
+<hr>
+
+<button class="accordion" style="text-align: center;"><b>Is it safe to use my credit card online?</b></button>
+<div class="panel">
+  <p>Yes. Whenever you place an order on our website, your credit card (or other payment) <br>
+     information is protected by Secure Sockets Layer (SSL), a sophisticated technology that <br>
+      encrypts all your private information as it travels over the Internet.</p>
+</div>
+<hr>
+
+<button class="accordion"style="text-align: center;"><b>Where is ElecHub located?</b></button>
+<div class="panel">
+  <p>Our two central warehouse locations are in the United States—New Jersey and California. <br>
+     We do offer worldwide shipping.</p>
+</div>
+<hr>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="background-image: url(images/bg2.jpg);background-repeat: no-repeat;width:3500px;height:700px;background-size: cover;background-position: 100%;">
+           <a href="shop.html"><button class="bg-light text-dark" style="text-align: center;margin-top:550px;margin-left:600px;width: 200px;height:50px;border-radius: 25px;font-family: monospace;">Shop Best Sellers</button></a>
+      </div>
+    </div>
+    </div>
+    <div class="container-fluid bg-dark text-light" style="width:100%;padding-top: 30px;padding-bottom: 100px;">
+      <div class="row">
+        <div class="col-md-4" style="padding-left: 50px;">
+          <h5><b>Secure Checkout</b></h5>
+          <p>We use bank-level encrypted SSL security to <br>
+             ensure your payment and personal <br>
+              information are 100% protected.</p>
+      
+        </div>
+        <div class="col-md-4">
+          <h5><b>ElecHub Customer Service:</b></h5>
+          <p>24/7 Support: support@elechub.com</p>
+          <br><br><br>
+          <button style="width:150px;border-radius:20px;height:35px;background-color: blue;border: 1px solid white;margin-left: 40px;"><i class="fa-regular fa-heart"></i> Follow on <b>shop</b></button>
+      
+        </div>
+        <div class="col-md-4">
+          <h5><b>Quick links</b></h5>
+          <nav>
+            <a href="">Search</a>
+            <br>
+          <a href="">Privacy Policy</a>
+          <br>
+          <a href="">Shipping Policy</a>
+          <br>
+          <a href="">Terms of Service</a>
+      </nav>
+      <br><br><br>
+      </div>
+      </div>
+         <hr>
+         <div class="row">
+          <div class="col-md-12" id="footer">
+            <img src="images/gpay.png" alt="">
+            <img src="images/apple pay.png" alt="">
+            <img src="images/meta.png" alt="">
+            <img src="images/visa.png" alt="">
+            <p style="padding-left: 160px;padding-top:20px;">@2024 <a href="">ElecHub</a>
+            </p>
+          </div>
+         </div>
+    </div>
+  <script>
+
+    function openPage() {
+      var overlay = document.getElementById("overlay");
+      var pageContent = document.getElementById("pageContent");
+      overlay.style.display = "block";
+      pageContent.style.display = "block";
+    }
+
+    // Optional: Close page function
+    function closePage() {
+      var overlay = document.getElementById("overlay");
+      var pageContent = document.getElementById("pageContent");
+      overlay.style.display = "none";
+      pageContent.style.display = "none";
+    }
+
+    var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+// 
+
+let openShopping = document.querySelector('.shopping');
+let closeShopping = document.querySelector('.closeShopping');
+let list = document.querySelector('.list');
+let listCard = document.querySelector('.listCard');
+let body = document.querySelector('body');
+let total = document.querySelector('.total');
+let quantity = document.querySelector('.quantity');
+
+openShopping.addEventListener('click', ()=>{
+    body.classList.add('active');
+})
+closeShopping.addEventListener('click', ()=>{
+    body.classList.remove('active');
+})
+
+let products = [
+    {
+        id: 1,
+        name: 'PRODUCT NAME 1',
+        image: '1.PNG',
+        price: 120000
+    },
+    {
+        id: 2,
+        name: 'PRODUCT NAME 2',
+        image: '2.PNG',
+        price: 120000
+    },
+    {
+        id: 3,
+        name: 'PRODUCT NAME 3',
+        image: '3.PNG',
+        price: 220000
+    },
+    {
+        id: 4,
+        name: 'PRODUCT NAME 4',
+        image: '4.PNG',
+        price: 123000
+    },
+    {
+        id: 5,
+        name: 'PRODUCT NAME 5',
+        image: '5.PNG',
+        price: 320000
+    },
+    {
+        id: 6,
+        name: 'PRODUCT NAME 6',
+        image: '6.PNG',
+        price: 120000
+    }
+];
+let listCards  = [];
+function initApp(){
+    products.forEach((value, key) =>{
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('item');
+        newDiv.innerHTML = `
+            <img src="image/${value.image}">
+            <div class="title">${value.name}</div>
+            <div class="price">${value.price.toLocaleString()}</div>
+            <button onclick="addToCard(${key})">Add To Card</button>`;
+        list.appendChild(newDiv);
+    })
+}
+initApp();
+function addToCard(key){
+    if(listCards[key] == null){
+        listCards[key] = products[key];
+        listCards[key].quantity = 1;
+    }
+    reloadCard();
+}
+function reloadCard(){
+    listCard.innerHTML = '';
+    let count = 0;
+    let totalPrice = 0;
+    listCards.forEach((value, key)=>{
+        totalPrice = totalPrice + value.price;
+        count = count + value.quantity;
+        if(value != null){
+            let newDiv = document.createElement('li');
+            newDiv.innerHTML = `
+                <div><img src="image/${value.image}"/></div>
+                <div>${value.name}</div>
+                <div>${value.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+                    <div class="count">${value.quantity}</div>
+                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
+                </div>`;
+                listCard.appendChild(newDiv);
+        }
+    })
+    total.innerText = totalPrice.toLocaleString();
+    quantity.innerText = count;
+}
+function changeQuantity(key, quantity){
+    console.log(key, quantity);
+    if(quantity == 0){
+        delete listCards[key];
+    }else{
+        listCards[key].quantity = quantity;
+        listCards[key].price = quantity * products[key].price;
+    }
+    reloadCard();
+}
+  </script>
+</body>
+
+</html>
